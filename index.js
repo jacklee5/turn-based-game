@@ -4,7 +4,11 @@ const app = express();
 const server = require("http").createServer(app);
 const io = require("socket.io")(server);
 
+const Game = require("./server/Game");
+const Player = require("./server/Player");
+
 const PORT = 3000;
+const games = [];
 
 app.use(express.static("static"));
 
@@ -13,8 +17,18 @@ app.get("/", (req, res) => {
 })
 
 io.on("connection", socket => {
-    console.log("a user connected");
-})
+    socket.on("JOIN", data => {
+        let game;
+        for (let i in games) {
+            if (games[i].isFull()) continue;
+            if (games[i].type === "private") continue;
+            game = games[i];
+        }
+        if (!game)
+            game = new Game();
+        
+    })
+});
 
 server.listen(PORT, () => {
     console.log("Listening on http://localhost:" + PORT);
