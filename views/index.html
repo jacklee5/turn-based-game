@@ -9,17 +9,24 @@
         <div class = "page start">
             <h1>Connect 4</h1>
             <input id="username" placeholder="Enter username..." />
-            <button id="public-game-button">Public Game</button>
-            <button id="create-game-button">Create Private Game</button>
+            <form id = "form-join-public">
+                <button id="public-game-button">Public Game</button>
+            </form>
+            <form id = "form-create-private">
+                <button id="create-game-button">Create Private Game</button>
+            </form>
             <input id="roomcode"/>
-            <button id="join-game-button">Join Private Game</button>
+            <form id = "form-join-private">
+                <button id="join-game-button">Join Private Game</button>
+            </form>
         </div>
         <div class = "page">
 
         </div>
         <script src="/socket.io/socket.io.js"></script>
-        <script src="/lib/p5.min.js"></script>
-        <script src="/js/menu.js"></script>
-        <script src="/js/game.js"></script>
+        <!-- <script src="/static/lib/p5.min.js"></script>
+        <script src="/static/js/menu.js"></script>
+        <script src="/static/js/game.js"></script> -->
+        <script src="/static/js/client.js"></script>
     </body>
 </html>

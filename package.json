@@ -18,7 +18,9 @@
   },
   "homepage": "https://github.com/jacklee5/turn-based-game#readme",
   "dependencies": {
+    "ejs": "^3.1.5",
     "express": "^4.17.1",
+    "html": "^1.0.0",
     "socket.io": "^3.0.2"
   }
 }
