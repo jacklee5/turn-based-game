@@ -33,6 +33,7 @@ function clearboard() {
 
 function move(x) {
     console.clear();
+    var nextTurn;
     var currentPlayer = (turncounter % 2) + 1
     //can probably remove
     if(x < 0 || x > 6) {
@@ -49,13 +50,16 @@ function move(x) {
             var ctx = canvas.getContext("2d");
             if(currentPlayer === 1){
                 ctx.fillStyle = '#FF0000';
+                nextTurn = "Yellow";
             } else {
                 ctx.fillStyle = '#FFFF00';
+                nextTurn = "Red";
             }
             ctx.fillRect(x*50, 250-i*50, 50, 50);
             printboard();
 
             if(checkwin(currentPlayer, x, i) === "win"){
+                //Change alert to say a color instead of a number
                 alert("Player " + currentPlayer + " wins!");
                 win = true;
                 clearboard();
@@ -65,11 +69,16 @@ function move(x) {
             break;
         }
     }
-    document.getElementById("playerNum").innerHTML = ("Current Player: " + ((currentPlayer+1)%2));
+    document.getElementById("playerNum").innerHTML = ("Next Turn: " + nextTurn);
     turncounter++;
+    if (turncounter >= 42){
+        console.log("What the balls!");
+        alert("NOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo000000000000OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO")
+    }
 }
 
 function checkwin(player, x, y) {
+
     //horizontal check
     if(x-3 >= 0){
         if(gameboard[x][y] === player){
@@ -177,9 +186,4 @@ function checkwin(player, x, y) {
         }
     }
     
-}
-
-if (turncounter >= 42){
-    console.log("What the balls!");
-    printboard();
 }
