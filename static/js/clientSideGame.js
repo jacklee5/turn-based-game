@@ -1,4 +1,4 @@
-/// <reference path=".././lib/p5.global-mode.d.ts"/>
+// / reference path=".././lib/p5.global-mode.d.ts"/>
 
 var win = false;
 var turncounter = 0;
@@ -28,6 +28,17 @@ function clearboard() {
         [0, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0],
     ]
+}
+
+function setup() {
+    createCanvas(350, 300);
+    background(200);
+    for(var i = 0; i < 7; i++){
+        line(0, i*50, 350, i*50)   
+    }
+    for(var i = 0; i < 8; i++){
+        line(i*50, 0, i*50, 300)   
+    }
     
 }
 
@@ -35,42 +46,51 @@ function move(x) {
     console.clear();
     var nextTurn;
     var currentPlayer = (turncounter % 2) + 1
-    //can probably remove
-    if(x < 0 || x > 6) {
-        console.log("Out of bounds!");
-        var row = readline();
-        move(turncounter%2, row);
-    }
+
+
+    //INSERT LOGIC TO PREVENT A ROW FROM GOING TOO HIGH
+
 
     //places piece at top of row and checks for a win
     for(var i = 0; i < 6; i++){ 
         if(gameboard[x][i] == 0){
             gameboard[x][i] = currentPlayer;
-            var canvas = document.getElementById("myCanvas");
-            var ctx = canvas.getContext("2d");
+            // var canvas = document.getElementById("myCanvas");
+            // var ctx = canvas.getContext("2d");
             if(currentPlayer === 1){
-                ctx.fillStyle = '#FF0000';
+                fill(color(255, 0, 0));
                 nextTurn = "Yellow";
             } else {
-                ctx.fillStyle = '#FFFF00';
+                fill(color(255, 204, 0));
                 nextTurn = "Red";
             }
-            ctx.fillRect(x*50, 250-i*50, 50, 50);
+            // ctx.fillRect(x*50, 250-i*50, 50, 50);
+            noStroke();
+            circle(x*50+25, 275-i*50, 48);
+
             printboard();
 
             if(checkwin(currentPlayer, x, i) === "win"){
                 //Change alert to say a color instead of a number
-                alert("Player " + currentPlayer + " wins!");
+                if(currentPlayer === 1) {
+                    alert("Red wins!");
+                } else {
+                    alert("Yellow wins!");
+                }
+                
                 win = true;
                 clearboard();
-                ctx.fillStyle = '#FFFFFF';
-                ctx.fillRect(0, 0, 350, 300)
+                setup();
+                turncounter = -1;
+                // ctx.fillStyle = '#FFFFFF';
+                // ctx.fillRect(0, 0, 350, 300)
             }
             break;
         }
     }
-    document.getElementById("playerNum").innerHTML = ("Next Turn: " + nextTurn);
     turncounter++;
+    document.getElementById("playerNum").innerHTML = ("Next Turn: " + nextTurn);
+    document.getElementById("turnCounter").innerHTML = ("Turn Counter: " + turncounter);
     if (turncounter >= 42){
         console.log("What the balls!");
         alert("NOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo000000000000OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO")
