@@ -26,4 +26,20 @@ document.getElementById("form-join-private").addEventListener("submit", (e) => {
     const room_ID = document.getElementById("roomcode").value;
     socket.emit("player-send-name", username);
     socket.emit("player-join-private", room_ID);
-})
+});
+
+const Pages = {
+    MENU: 0,
+    GAME: 1
+}
+const showPage = id => {
+    const pages = document.getElementsByClassName("page");
+    for (let i = 0; i < pages.length; i++) {
+        pages[i].style.display = "none";
+    }
+    pages[id].style.display = "block";
+}
+
+socket.on("game found",  () => {
+    showPage(Pages.GAME);
+});

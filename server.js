@@ -13,6 +13,10 @@ app.get('/', function (req, res) {
     res.sendFile(__dirname + '/views/index.html');
 });
 
+app.get('/temp-game', (req, res) => {
+    res.sendFile(__dirname + "/views/tempGameDemo.html");
+})
+
 //load classes
 const Game = require("./server/Game");
 const Player = require("./server/Player");
@@ -55,12 +59,19 @@ io.on('connection', function (socket) {
         joinGame(socket, username, true, roomcode);
     });
 
+    socket.on("move", x => {
+        const player = players[socket.id];
+        console.log(player);
+        if (player.game)
+            player.game.move(x);
+    })
+
     socket.on("disconnect", () => {
         const player = players[socket.id];
         if(!player) return;
         console.log(`[DEBUG] user ${player.name} disconnected`);
         const game = player.game;
-        player.leaveGame();
+        // player.leaveGame();
         if(!game) return;
         if(game.players.length === 0)
             delete games[game.id];  
@@ -114,6 +125,7 @@ const joinGame = (socket, username, private, roomcode) => {
         socket.join(roomId);
         games[roomId].addPlayer(player);
         players[socket.id] = player;
+        player.game = games[roomId];
 
         console.log(`[DEBUG] user ${username} in joined room ${roomId}`)
         

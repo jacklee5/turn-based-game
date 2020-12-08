@@ -2,7 +2,7 @@
 <html>
     <head>
         <title>Connect 4</title>
-        <link href="/css/style.css" rel="stylesheet">
+        <link href="/static/css/style.css" rel="stylesheet">
     </head>
     <body>
         <!-- menu page -->
@@ -21,12 +21,25 @@
             </form>
         </div>
         <div class = "page">
-
+            <h2 id="playerNum">Next Turn: Red</h2>
+            <h2 id="turnCounter">Turn Counter: 0</h2>
+            <button onclick="move(0)" style="width:47px">1</button>
+            <button onclick="move(1)" style="width:46px">2</button>
+            <button onclick="move(2)" style="width:47px">3</button>
+            <button onclick="move(3)" style="width:46px">4</button>
+            <button onclick="move(4)" style="width:47px">5</button>
+            <button onclick="move(5)" style="width:46px">6</button>
+            <button onclick="move(6)" style="width:47px">7</button>
+            <br>
+            <!-- <canvas id="myCanvas" width="350" height="300" style="border:1px solid #4b4545;"></canvas> -->            
+            <div id = "game"></div>
         </div>
         <script src="/socket.io/socket.io.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.8.0/p5.min.js"></script>
         <!-- <script src="/static/lib/p5.min.js"></script>
         <script src="/static/js/menu.js"></script>
         <script src="/static/js/game.js"></script> -->
         <script src="/static/js/client.js"></script>
+        <script src="/static/js/clientSideGame.js"></script>
     </body>
 </html>
