@@ -43,3 +43,7 @@ const showPage = id => {
 socket.on("game found",  () => {
     showPage(Pages.GAME);
 });
+
+socket.on("game closed",  () => {
+    showPage(Pages.MENU);
+});

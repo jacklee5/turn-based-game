@@ -4,10 +4,8 @@ module.exports = class Game {
         this.io = io;
         this.is_private = false;
 
-        this.players = 0;
+        this.players = [];
 
-        this.player1;
-        this.player2;
         this.ID;
 
         this.gameboard = [
@@ -24,18 +22,13 @@ module.exports = class Game {
         this.win = false;
     }
     isFull() {
-        return this.players == 2;
+        return this.players.length == 2;
     }
     isPrivate() {
         return this.is_private;
     }
     addPlayer(player) {
-        if (this.player1) {
-            this.player2 = player;
-        } else {
-            this.player1 = player;
-        }
-        this.players++;
+        this.players.push(player);
     }
     clearboard() {
         this.gameboard = [

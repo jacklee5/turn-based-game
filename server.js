@@ -71,10 +71,12 @@ io.on('connection', function (socket) {
         if(!player) return;
         console.log(`[DEBUG] user ${player.name} disconnected`);
         const game = player.game;
-        // player.leaveGame();
         if(!game) return;
-        if(game.players.length === 0)
-            delete games[game.id];  
+        // message to say the game is closed
+        for (let i in games[game.id].players) {
+            games[game.id].players[i].socket.emit("game closed");
+        }
+        delete games[game.id];  
     })
 });
 

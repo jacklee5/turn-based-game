@@ -4,4 +4,7 @@ module.exports = class Player {
         this.socket = socket;
         this.game;
     }
+    leaveGame() {
+        this.game.removePlayer(this);
+    }
 }
