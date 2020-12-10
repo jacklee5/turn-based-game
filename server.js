@@ -60,10 +60,15 @@ io.on('connection', function (socket) {
     });
 
     socket.on("move", x => {
+        var moveResult = 0;
         const player = players[socket.id];
         console.log(player);
         if (player.game)
-            player.game.move(x);
+            moveResult = player.game.move(x);
+        
+            if(moveResult === 4){
+                socket.emit("badMove");
+            }
     })
 
     socket.on("disconnect", () => {
