@@ -40,6 +40,7 @@ function setup() {
     for(var i = 0; i < 8; i++){
         line(i*50, 0, i*50, 300)   
     }
+    
 }
 
 // function move(x) {
@@ -212,10 +213,9 @@ function setup() {
 function move(x) {
     socket.emit("move", x);
 }
-
-socket.on("badMove"){
+socket.on("badMove", () => {
     alert("That move is no good! Put your piece in a different column.")
-}
+})
 
 socket.on("piece", data => {
     let currentPlayer = data.player;
