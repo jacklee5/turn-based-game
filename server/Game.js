@@ -18,6 +18,7 @@ module.exports = class Game {
             [0, 0, 0, 0, 0, 0],
         ];
 
+        this.started = false;
         this.turncounter = 0;
         this.win = false;
     }
@@ -29,6 +30,11 @@ module.exports = class Game {
     }
     addPlayer(player) {
         this.players.push(player);
+        if (this.players.length == 2) {
+            this.players[0].playerNumber = 1;
+            this.players[1].playerNumber = 2;
+            this.started = true;
+        }
     }
     clearboard() {
         this.gameboard = [

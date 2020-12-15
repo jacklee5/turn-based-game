@@ -63,7 +63,7 @@ io.on('connection', function (socket) {
         var moveResult = 0;
         const player = players[socket.id];
         console.log(player);
-        if (player.game)
+        if (player.game && player.game.started && player.playerNumber === ((player.game.turncounter % 2) + 1))
             moveResult = player.game.move(x);
             console.log("moveresult: ");
             console.log(moveResult);
