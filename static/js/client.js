@@ -44,6 +44,10 @@ socket.on("game found",  () => {
     showPage(Pages.GAME);
 });
 
+socket.on("bad move",  () => {
+    alert("That move is illegal! Please put your piece in a column with empty spaces.");
+});
+
 socket.on("game closed",  () => {
     showPage(Pages.MENU);
 });
