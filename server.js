@@ -65,9 +65,10 @@ io.on('connection', function (socket) {
         console.log(player);
         if (player.game && player.game.started && player.playerNumber === ((player.game.turncounter % 2) + 1))
             moveResult = player.game.move(x);
-        
-            if(moveResult === 4){
-                socket.emit("badMove");
+            console.log("moveresult: ");
+            console.log(moveResult);
+            if(moveResult === -1){
+                socket.emit("bad move");
             }
     })
 
