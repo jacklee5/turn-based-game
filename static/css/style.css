@@ -4,3 +4,22 @@
 .start { 
     display: block;
 }
+.circle { 
+    border-radius: 50%;
+    height: 25px;
+    width: 25px;
+    display: inline-block;
+}
+.red {
+    background: red;
+}
+.yellow {
+    background: yellow;
+}
+.name {
+    line-height: 25px;
+    display: inline-block;
+    height: 25px;
+    vertical-align: top;
+    margin: 0 8px;
+}

@@ -1,4 +1,5 @@
 const socket = io();
+let public = false;
 
 // default stuff, add player to new room, make new room if needed
 document.getElementById("form-join-public").addEventListener("submit", (e) => {
@@ -7,6 +8,7 @@ document.getElementById("form-join-public").addEventListener("submit", (e) => {
     const username = document.getElementById("username").value;
     socket.emit("player-send-name", username);
     socket.emit("player-join-public");
+    public = true;
 })
 
 // creates a private game, only joinable by code

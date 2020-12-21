@@ -34,6 +34,7 @@ module.exports = class Game {
             this.players[0].playerNumber = 1;
             this.players[1].playerNumber = 2;
             this.started = true;
+            this.io.in(this.id).emit("players", [this.players[0].name, this.players[1].name])
         }
     }
     clearboard() {
