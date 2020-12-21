@@ -79,9 +79,8 @@ io.on('connection', function (socket) {
         if(!game) return;
         // message to say the game is closed
         if (games[game.id])
-            for (let i in games[game.id].players) {
+            for (let i in games[game.id].players) 
                     games[game.id].players[i].socket.emit("game closed");
-        }
         delete games[game.id];  
     })
 });
