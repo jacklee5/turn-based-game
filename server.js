@@ -62,12 +62,12 @@ io.on('connection', function (socket) {
     socket.on("move", x => {
         var moveResult = 0;
         const player = players[socket.id];
-        console.log(player);
         if (player.game && player.game.started && player.playerNumber === ((player.game.turncounter % 2) + 1))
             moveResult = player.game.move(x);
-        
-            if(moveResult === 4){
-                socket.emit("badMove");
+            console.log("moveresult: ");
+            console.log(moveResult);
+            if(moveResult === -1){
+                socket.emit("bad move");
             }
     })
 
@@ -78,9 +78,9 @@ io.on('connection', function (socket) {
         const game = player.game;
         if(!game) return;
         // message to say the game is closed
-        for (let i in games[game.id].players) {
-            games[game.id].players[i].socket.emit("game closed");
-        }
+        if (games[game.id])
+            for (let i in games[game.id].players) 
+                    games[game.id].players[i].socket.emit("game closed");
         delete games[game.id];  
     })
 });
@@ -153,5 +153,5 @@ setInterval(() => {
 }, 1000 / 60)
 
 http.listen(7777, "0.0.0.0", function () {
-    console.log('listening on *:80');
+    console.log('listening on port 7777');
 });
